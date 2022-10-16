@@ -10,12 +10,12 @@ import pandas as pd
 minTimeToHoldBeforeSell = 30
 maxTimeToHoldBeforeSell = 60
 
-minTimeToHoldBeforeSell = 2
-maxTimeToHoldBeforeSell = 4
+#minTimeToHoldBeforeSell = 2
+#maxTimeToHoldBeforeSell = 4
 
 
 # dataFile = "data_test.csv"
-dataFile = "data_test.csv"
+dataFile = "data_all.csv"
 
 # test profitability of buying at the given time and selling at any time from time + 59 to time + 1
 # timestep is the current time step to assess our position from to determine whether we should
