@@ -1,4 +1,3 @@
-import csv
 import pandas as pd
 
 
@@ -11,12 +10,12 @@ import pandas as pd
 minTimeToHoldBeforeSell = 30
 maxTimeToHoldBeforeSell = 60
 
-#minTimeToHoldBeforeSell = 2
-#maxTimeToHoldBeforeSell = 4
+minTimeToHoldBeforeSell = 2
+maxTimeToHoldBeforeSell = 4
 
 
-#dataFile = "data_test.csv"
-dataFile = "data_all.csv"
+# dataFile = "data_test.csv"
+dataFile = "data_test.csv"
 
 # test profitability of buying at the given time and selling at any time from time + 59 to time + 1
 # timestep is the current time step to assess our position from to determine whether we should
@@ -29,6 +28,7 @@ def returnProfitForPosition(csvData, timeStep):
 
     bestSellTime = -1
     bestSellProfit = 0
+    bestSellPrice = 0
 
     # iterate over all possible sell option times (from current time+30 to current time+59) and find highest if available and return it
     # if no profit can be made, return -1
@@ -37,13 +37,12 @@ def returnProfitForPosition(csvData, timeStep):
         # Check if buying at timeStep, and then selling at timeStep+earliestcanSel+i up until max time before sell
         if (currentPrice-buyPrice > bestSellProfit):
             bestSellTime = i
+            bestSellPrice = currentPrice
             bestSellProfit = currentPrice-buyPrice
 
     if (bestSellTime != -1):
         print(
-            f'The best time to sell having bought at {timeStep} was at {bestSellTime} with profit of {bestSellProfit}')
-    else:
-        print(f'There was no profitable time to buy at {timeStep} and sell')
+            f'Open at {timeStep} ({buyPrice}), close at {bestSellTime} ({bestSellPrice}), profit of:{bestSellProfit}')
 
     return {'sellTime': bestSellTime, 'profit': bestSellProfit}
 
@@ -59,9 +58,7 @@ def process():
     rows = len(csvData.index)
 
     # begin processing
-    # while currentPosition < csvData.le
     while currentTimeStep + minTimeToHoldBeforeSell < rows:
-        print(f'Time step is:{currentTimeStep}')
         buy = returnProfitForPosition(csvData, currentTimeStep)
         if (buy["sellTime"] != -1):
             currentTimeStep = buy["sellTime"] + 1
@@ -69,15 +66,8 @@ def process():
         else:
             currentTimeStep += 1
 
-        print(f'Moved to timestep:{currentTimeStep}')
-
-        if (currentTimeStep + minTimeToHoldBeforeSell >= rows):
-            print(
-                f'Unable to sell from this timestep with only {rows - currentTimeStep} remaining')
-
-    print(" done.")
-
-    print(f'Profit was:{profit}')
+    print("...")
+    print(f'Profit over entire trading period of {rows} was:{profit}')
 
 
 if __name__ == "__main__":
