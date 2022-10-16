@@ -7,27 +7,27 @@ import pandas as pd
 import sys
 import threading
 
-#minTimeToHoldBeforeSell = 30
-#maxTimeToHoldBeforeSell = 60
+minTimeToHoldBeforeSell = 30
+maxTimeToHoldBeforeSell = 60
 
-minTimeToHoldBeforeSell = 2
-maxTimeToHoldBeforeSell = 4
+#minTimeToHoldBeforeSell = 2
+#maxTimeToHoldBeforeSell = 4
 
 
-dataFile = "data_test.csv"
-#dataFile = "data_3600.csv"
+#dataFile = "data_test.csv"
+dataFile = "data_3600.csv"
 #dataFile = "data_all.csv"
 
 # Retrieve csv data
 print("Reading data file ...")
 csvData = pd.read_csv("data/" + dataFile, sep=',')
-rows = len(csvData.index)
+stock_price = list(csvData.values[:, 1])
 
 # calculated results for everypossible result at every possible time
 # Default to -1 to indicate no cached value present
 lookup = []
-lookup = [[] for i in range(rows)]
-for i in range(0, rows):
+lookup = [[] for i in range(len(stock_price))]
+for i in range(0, len(stock_price)):
     x = [-1 for i in range(maxTimeToHoldBeforeSell+1)]
     lookup[i] = x
 
@@ -35,7 +35,7 @@ for i in range(0, rows):
 def processNodes(time, timeHeld):
     # If at end of time return 0 since nothing can be done once we
     # are out of time
-    if (time == rows):
+    if (time == len(stock_price)):
         return 0
 
     global lookup
