@@ -2,6 +2,10 @@ import csv
 import pandas as pd
 from anytree import Node, RenderTree
 
+#
+# SO this poor chap doesn't actually work due to the brute fore overkill over the recursion ... neat idea imo ... simple ... but untenable
+#
+
 minTimeToHoldBeforeSell = 30
 maxTimeToHoldBeforeSell = 60
 

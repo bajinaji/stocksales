@@ -1,8 +1,11 @@
-# stock sales profit making short sighted guru
-
+# stock sales profit making samples
+## Thoughts
+This seems to be an NP Complete scenario, similar to a travelling salesman problem (although my math is not strong these days), so as you see I've tried effectively brute force methods progressing to limiting the number of calls as much as possible using memoization.
+<br><br><br>
+## 1. Compulsive Buyer
 ### Requirements
-Python 3+
-pandas installed and accessible (use good old pip)
+* Python 3+
+* pandas installed and accessible (use good old pip)
 ***
 ### Run project
 - Run "python compulsiveBuyer.py" from a bash shell
@@ -16,37 +19,50 @@ In my naive implementation my "compulsive" buyer will buy at any point in time w
 There is no awareness of the distant future, so many opportunities will be missed.
 They do make a profit, which is something.
 
+### Caveats
+Well ... it basically sucks
+He runs quickly, 30t, and is guaranteed not to make a loss ... that's as good as it gets.
+
+***
+<br><br><br>
+## 2. Parallel Universes Buyer
+
+### Requirements
+* Python 3+
+* pandas
+* anytree
+***
+### Run project
+- Run "python parallelUniverseBuyer.py" from a bash shell
+
+***
+### Description
+Brute force at it's best
+Uses a list rather than recursion, but does nothing smart, so runs at ... 2 * t..ish.
+Runs fine on my tiny test data I created ... I didn't have the patience for it to finish even with the 3600 set.
+Just to show my thinking, really.
 
 ### Caveats
-Could implement a heuristic for trying future rounds but factoring in a de-incentive
-
-Factor in the concept of taking earlier options that are slightly less profitable but offer future possible higher returns
-
-
-
-brute force!!!!  memory overhead, run time ... also can't be bothered ...
-at each position make every possible call recurisely (be it hold, buy or sell)
-
-
-0123456789
-
-0 0
-  1
-
-1 0 0 0 0
-
-2 ^ 65000 ... ish
-
+Well ... this one basically doesn't finish ... at least not in my life time
 ***
-### Options
-This seems to be an NP Complete scenario, similar to a travelling salesman problem (although my math is not strong these days), so I toyed with implementing a recursive brute force algorithm that branches at every choice path (to hold, buy or sell depending on situation) that would execute each recursive branch one upon the other ...
-This would end up with 2 to the power of 65000 paths in this situation I believe, which is nnnnnot really tenable.
-
-Also currently pondering a working backwards system that can minimize the number of open branches by looking at paths that cross over one another ...
-However I've spent 3-4 hours on this, and don't really want to invest too much more time
-
-
+<br><br><br>
+## Cached Recursive Buyer
+### Requirements
+* Python 3+
+* pandas
+* anytree
 ***
-#### Notes:
-No test cases or so forth ... didn't seem appropriate for an algorithm implementation example.
-Python is not my normal professional general purpose language, so apologies for non optimal implementations, I would generally implement in C# or lua or C++ or Typescript (and yes, javascript was a given option but honestly I don't really rate it highly so was happy to go with python, you'll just have to give a little lee-way)
+### Run project
+- Run "python parallelUniverseBuyer.py" from a bash shell
+***
+### Description
+Okay, this one runs ... so long as we allow a massive stack size (I wish stack were interchangeable with heap).
+At least, having identified the overlapping sub problems I was able to memoize the data.
+So still not perfect in any sense, but this caches the data to ensure limited recursion, and runs at  O(N*(maxtoHold-minToHold)) to account for every possible state at each possible time.
+I'd like to have converted into a linear solution, of course, but this is a step in the right direction 
+***
+<br><br><br><br><br>
+***
+## Notes:
+No test cases or so forth ... didn't seem appropriate for an algorithm implementation example that is not going to be worked on be multiple people or that necessarily even work!
+Python is not my normal professional general purpose language, so apologies for non optimal implementations, I would generally implement in C# or lua or C++ or Lisp or Typescript (and yes, javascript was a given option but honestly I don't really rate it highly so was happy to go with python, you'll just have to give a little lee-way)
