@@ -1,11 +1,19 @@
 # stock sales profit making samples
+
+## Getting started!
+Please clone the code from your favourite shell with:
+```
+git clone https://github.com/bajinaji/stocksales
+```
 ## 1. Compulsive Buyer
 ### Requirements
 * Python 3+
 * pandas installed and accessible (use good old pip)
 ***
 ### Run project
-- Run "python compulsiveBuyer.py" from a bash shell
+```
+Run "python compulsiveBuyer.py" from a bash shell
+```
 
 ***
 ### Description
@@ -30,7 +38,9 @@ He runs quickly, 30t, and is guaranteed not to make a loss ... that's as good as
 * anytree
 ***
 ### Run project
-- Run "python parallelUniverseBuyer.py" from a bash shell
+```
+Run "python parallelUniverseBuyer.py" from a bash shell
+```
 
 ***
 ### Description
@@ -43,19 +53,21 @@ Just to show my thinking, really.
 Well ... this one basically doesn't finish ... at least not in my life time
 ***
 <br><br><br>
-## Cached Recursive Buyer
+## Cached/Memoized Parallel Buyer
 ### Requirements
 * Python 3+
 * pandas
 * anytree
 ***
 ### Run project
+```
 - Run "python cachedRecursionDude.py" from a bash shell
+```
 ***
 ### Description
-Okay, this one runs ... so long as we allow a massive stack size (I wish stack were interchangeable with heap).
+Okay, this one runs ... so long as we allow a massive stack size (I wish stack were interchangeable with heap).  And a fixed array of size t*(max-min hold)
 At least, having identified the overlapping sub problems I was able to memoize the data.
-So still not perfect in any sense, but this caches the data to ensure limited recursion, and runs at  O(N*(maxtoHold-minToHold)) to account for every possible state at each possible time.
+So still not perfect in any sense, but this caches the data to ensure limited recursion, and runs at  O(N*(maxtoHold-minToHold)) to account for every possible state at each possible time once and to fill the cache grid
 I'd like to have converted into a linear solution, of course, but this is a step in the right direction 
 ***
 <br><br><br>
@@ -63,10 +75,12 @@ I'd like to have converted into a linear solution, of course, but this is a step
 ### Requirements
 * Python 3+
 * pandas
-* anytree
 ***
 ### Run project
-- Run "python backwardsBuyer.py" from a bash shell
+```
+Run "python backwardsBuyer.py" from a bash shell
+```
+
 ***
 ### Description
 Finally one I'm happy with.
