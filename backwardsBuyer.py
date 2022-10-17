@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 #dataFile = "data_3600.csv"
 dataFile = "data_test.csv"
