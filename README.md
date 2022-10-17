@@ -1,7 +1,4 @@
 # stock sales profit making samples
-## Thoughts
-I initially thought this might be NP Hard or NP Complete ... but final investigations show that although there's not an "intelligent" solution, a pure count back evaluation can assess the best solution easily by evaluating the best option at any point in time counting back.
-<br><br><br>
 ## 1. Compulsive Buyer
 ### Requirements
 * Python 3+
