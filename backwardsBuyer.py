@@ -31,11 +31,13 @@ def processStocks():
         next_index[i] = i + 1
 
     # start at the end of the stock price list and work backwards
+
+    # will be used as a temp array each round, not sure how python garbage collects, so won't recreate in loop
+    total_profits = [0]*(max_hold+1)
     for i in range(len(stock_price)-1-min_hold, -1, -1):
         # Need to work out the highest total profit of all the points from i to i+max_hold
         # The points from i to min_hold won't have any additional trades
         # The points from min_hold to max_hold will have 1 additional trade
-        total_profits = [0]*(max_hold+1)
 
         # set values where cannot trade to best value from next time iteration (0 steps ahead to min hold time where cannot sell)
         for j in range(0, min_hold-1):
@@ -49,6 +51,8 @@ def processStocks():
 
         m = max(total_profits)
         # there may be more than one max TODO: check if there are ? Does it matter?  Will hold all best, but just use the first for now
+        # Seriously ... I think no difference, we don't care about multiple equals, right?  Since it's the same day it makes
+        # no difference unless you have a personal view on when to sell
         max_index = [k for k, j in enumerate(total_profits) if j == m]
 
         next_index[i] = i + max_index[0] + 1
