@@ -1,19 +1,18 @@
 import pandas as pd
 
-#dataFile = "data_3600.csv"
-dataFile = "data_test.csv"
+dataFile = "data_3600.csv"
+#dataFile = "data_test.csv"
 
 # Retrieve csv data
 print("Reading data file ...")
 csvData = pd.read_csv("data/" + dataFile, sep=',')
 stock_price = list(csvData.values[:, 1])
 
+min_hold = 30 + 1  # min hold time
+max_hold = 60 + 1  # max hold time
 
-# min_hold = 30 + 1  # min hold time
-# max_hold = 60 + 1  # max hold time
-
-min_hold = 2 + 1  # min hold time
-max_hold = 4 + 1  # max hold time
+# min_hold = 2 + 1  # min hold time
+# max_hold = 4 + 1  # max hold time
 
 # start at the end of the list, and build up the optimal thing to do at each time step working backwards
 
@@ -30,7 +29,7 @@ def processStocks():
     # skip where can't make a trade
     for i in range(len(stock_price) - min_hold, len(stock_price)):
         next_index[i] = i + 1
-        best_action[i] = False
+
     # start at the end of the stock price list and work backwards
     for i in range(len(stock_price)-1-min_hold, -1, -1):
         # Need to work out the highest total profit of all the points from i to i+max_hold
